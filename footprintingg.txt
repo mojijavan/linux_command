@@ -1,0 +1,22 @@
+DNS
+>whois bndweb.ir
+
+google hacking
+Using Google to Find Directory Listings
+intitle:“index of” “parent directory”
+*we can use The Google Hacking Database (GHDB) for gathering information
+*we can use netcraft for datagathering from website
+
+>nslookup bndweb.ir
+
+recon-ng is a module-based framework for web-based information gathering
+
+use web data extractor in windows
+use httrack
+use metagofil for downlosd file from website with specific type
+>metagofil -d bndweb.ir -t pdf,doc -l 200 -n 3 -o myfiles -f results.html
+social enginering
+eavesdroppingb - listening
+pishing
+sholder surfing - sneak peak
+dumpster - trash - garbage checking

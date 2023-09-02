@@ -1,0 +1,89 @@
+Debian-based distros use .deb files as their "packages" and 
+use tools like apt-get, dpkg, apt, and other tools to manage them.
+
+How does the OS know where to look for this deb package? The answer is Repositories.
+On debian systems, the main configuration locations are: 
+> /etc/apt/sources.list 
+> /etc/apt/sources.list.d/
+
+Updating sources information:
+> apt-get update
+
+apt-get resolved dependencies
+apt-get install tmux
+
+If you only want a dry-run/simulation:
+apt-get install -s tmux
+
+and this will only download the files needed into the cache without installing them:
+apt-get install --download-only tmux
+
+The downloaded packages are stored as a cache in 
+/var/cache/apt/archive/
+
+If you want to download only one specific package, you can do:
+apt-get download tmux
+
+Removing debian packages
+apt-get remove tmux
+
+And if you want to remove automatically installed dependencies:
+$ apt-get autoremove tmux
+or even
+$ apt-get autoremove
+
+Searching for packages
+$ apt-cache search "tiny window"
+$ apt search grub2
+
+For updating a single package:
+apt-get install tzdata
+
+And for upgrading whatever is installed:
+apt-get upgrade
+
+Or going to a new distribution:
+apt-get dist-upgrade
+
+Reconfiguring packages
+dpkg-reconfigure tzdata
+
+The underlying tool to work with .deb files is the dpkg.
+It is your to-go tool if you want to do manual actions on a deb package. The general format is:
+dpkg [OPTIONS] ACTION PACKAGE
+
+You can check the contents:
+dpkg --contents bzr_2.7.0+bzr6622+brz_all.deb
+
+Or install a deb package (without its dependencies) or check its status:
+$ dpkg -s bzr
+
+Or even purge an installed package; Removing the package and all of its configurations. 
+To Purge a package, use the -P or --purge switch.
+There is also -L to check the files and directories a package installed:
+dpkg -L bzr
+
+In some cases a package is installed but without proper dependencies
+ an installation is interrupted for any reason. In these cases a 
+apt-get install -f might help, -f is for fix broken.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

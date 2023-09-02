@@ -1,0 +1,20 @@
+﻿
+primary difficulty with client-side attacks lies in enumeration of
+the victim’s client software
+
+<?php
+$t="browser.txt";
+$r=$_SERVER['HTTP_USER_AGENT'];
+$E=$_SERVER['REMOTE_ADDR'];
+$G=fopen($t,'a');
+fwrite($g,$r);
+fwrite($g,'**********************');
+fwrite($g,$w);
+fclose($g);
+echo "salam user"
+?>
+
+access for write to directory from web
+>chmod 777 html/
+or
+>chmode o+w html/

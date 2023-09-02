@@ -1,0 +1,53 @@
+sysfs is a pseudo file . inormation about various kernel subsystems, hardware devices, and associated device drivers from the kernel's device model to user space through virtual files
+> ls /sys
+
+udev (userspace /dev) is a device manager for the Linux kernel
+ls /dev
+
+hard detail
+>ls /dev/sda or /dev/nvme0
+
+D-Bus is a message bus system
+
+This is where the Kernel keeps its settings and properties.
+You can find things like:
+IRQs (interrupt requests)
+I/O ports (locations in memory where CPU can talk with devices)
+DMA (direct memory access, faster than I/O ports)
+Processes
+Network Settings
+> ls /proc
+
+The numbers are the process IDs! There are also other files like cpuinfo, mounts, meminfo
+> cat /proc/cpuinfo
+
+lsusb, lspci, lsblk, lshw
+
+Just like ls but for pci, usb, ...
+
+lspci
+Shows PCI devices that are connected to the computer.
+
+lsusb
+Shows all the USB devices connected to the system.
+
+lshw
+Shows hardware. Test it!
+
+lsblk
+Used for list devices that can read from or write to by blocks of data.
+
+lsmod
+Shows kernel modules. They are located at /lib/modules.
+
+These are the kernel modules that are loaded. Use modinfo to get more info about a module; If you want.
+
+If you need to add a module to your kernel (say a new driver for hardware) or remove it (uninstall a driver) you can use rmmod and modprobe.
+# rmmod iwlwifi
+
+And this is for installing the modules:
+# insmod kernel/drivers/net/wireless/iwlwifi.ko
+
+But nobody uses insmod because it does not understand dependencies and you need to give it the whole path to the module file. Instead, use the modprobe command:
+# modprobe iwlwifi
+

@@ -1,0 +1,36 @@
+get windows system info
+>systeminfo
+
+wmic usw for windows management with cmd
+get windows architecture with wmic
+>wmic os get osaechitecture
+
+listing the disk drivers with wmic
+>wmic logicaldisk get caption
+
+indtalled patches  with wmic
+>wmic qfe get caption,description,hotfixid,installedon
+
+>whoami
+>whoami /priv
+
+list user and groups
+>net user
+
+list local group
+>net loccalgroup
+>net localgroup IIS_IUSRS
+>net group /domain
+
+Networking	Information
+>ipconfig /all
+
+local host routing table
+>route print
+
+To list all the current connections established from the Windows host
+>netstat -ano
+
+list the firewall configuration and state
+>netsh firewall show state
+>netsh firewall show state

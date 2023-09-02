@@ -1,0 +1,96 @@
+> vim script
+#press i to go insert mode and use wq for save file
+
+#!/bin/bash
+echo "mojtaba"
+
+> chmod +x sript #add excutable feature to script file 
+
+> ./script #run script
+
+
+Compare in script
+#!/bin/bash
+val1=10
+val2=12
+if [ $val1 -gt 5 ]; then
+	echo "the value $val1 is greater than 5"
+fi
+
+val3="str"
+val4="abc"
+if [ $val3 \> $val4 ]; then
+	echo "greater than"
+else
+	echo "less than"
+fi
+
+dir=/home/moji
+if [ -d $dir]; then
+	echo "the $dir directory exist"
+fi
+
+#!/bin/bash
+if ls -l then
+	echo "then Portion"
+elif echo $UID then
+	echo "then Portion"
+else
+	echo "then Portion"
+fi
+
+loops
+for package in $(apt list --installed);do
+	echo "package : $package"
+	sleep 2
+done
+
+i=10
+whie [ $i -gt 0 ];do
+	echo $var
+	var1=$[$var1 -1]	
+	sleep 1
+done
+
+IFS=$'\n'
+	for entry in $(cat /etc/passwd); do
+		echo "values in entry --"
+		IFS=:
+		for value in $entry; do
+			echo "$value"
+		done
+done
+
+IFS=$'\n'
+	for folder in $PATH; do
+		echo "$folder: "
+		
+		for file in $folder/*; do
+			if [ -x $file]; then
+				echo "$file"
+			fi
+		done
+done
+
+Command Line Parameters
+>./bashscript 2 3
+$1 is 2 and $2 is 3 - script inputs
+
+#check number of inputs
+if [$# == 2]; then 
+	echo "$1 and $2"
+else 
+	echo " we did not get two parameters"
+fi
+
+#case
+#!/bin/bash
+while [ -n "$1" ]; do
+			case "$1" in
+				-a) echo "found the -a option" ;;
+				-b) echo "found the -b option" ;;
+				-c) echo "found the -c option" ;;
+				-*) echo "$1 is not option" ;;
+			esac
+			shift
+done

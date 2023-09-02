@@ -1,0 +1,24 @@
+port Scanning
+
+Forward Lookup Brute Force
+>cat list.txt
+www
+ftp
+mail
+owa
+proxy
+router
+Using Bash to brute force forward DNS name lookups
+>for ip in $(cat list.txt); do host $ip.megacorpone.com; done
+
+Using Bash to brute force reverse DNS names
+for ip in $(seq 50 100); do host 38.100.193.$ip; done | grep -v "not found"
+
+DNS Zone Transfers - use if administrators misconfigure their DNS servers
+Using host to perform a DNS zone transfer
+host -l <domain name> <dns server address>
+>host -l megacorpone.com ns1.megacorpone.com
+
+Kali automate DNS enumeration: dnsstream -dnsenum
+>dnsrecon -d bndweb.ir -t axfr
+>dnsenum zonetransfer.me

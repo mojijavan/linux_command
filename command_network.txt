@@ -1,0 +1,18 @@
+#show interface data
+> ip address show
+#set ip address for interface
+>sudo ipconfig eth0:0 10.1.0.15 netmask 255.255.255.0
+#show interfaces data
+sudo ifconfig
+
+> sudo ifconfig eth0:0 down OR up
+
+network file location
+/etc/sysconfig/network 
+n
+
+
+
+
+
+#description for div

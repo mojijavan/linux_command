@@ -1,0 +1,83 @@
+To do so you need to know about these characters:
+means any string
+? means any single character
+[ABC] matches A, B, or C
+[a-k] matches a, b, c, ..., k (both lower-case and upper-case)
+[0-9a-z] matches all digits and numbers
+[!x] means NOT X.
+
+> rm *	#delete all files in this directory
+> ls A*B	#show all files starting with A and ending with B
+> cp ???.* /tmp	#Copy all files with 3 characters, then a dot then whatever (even nothing) to /tmp
+> rmdir [a-z]*	#remove all empty directories which start with a letter
+
+Copy (cp), Move (mv), and Delete (rm)
+move use for move and rename file
+copy file
+> cp source destination
+copy Directory
+> cp -r A /tmp/
+> cp -r A . # dot means COPY File A to Father Directory
+Creating (mkdir) and removing (rmdir) directories
+> mkdir new_dir
+create a tree of directories use -p switch to tell the mkdir to create the parent directories if needed
+>mkdir -p 1/2/3
+create directory with space in name
+>mkdir "pwk directory"
+
+rmdir new_dir #rmdir delete empty folders
+rmdir -p 1/2/3 #delete empty folders with empty subFolders
+
+delete folder and everything in him
+rm -rf directory_name
+
+The touch will create an empty file (if it does not exists) or updates the modification date
+> touch myfile
+
+To determine the type of a file
+> file myfile
+
+The dd command copies data from its input to its output
+> dd if=note_to_self of=new_file
+But commonly people use it to read/write from block devices
+> dd if=/dev/sda of=backup.dd bs=4096
+> dd if=/dev/sda2 | gzip > backup.dd.gzip
+ or even writing your iso files to a USB disk to have a live bootable USB
+> sudo dd if=ubuntu.iso of=/dev/sdc bs=2048:
+
+ The find command helps us to find files based on different criteria
+> find /var -iname '*tmp' -size +1M -size -100M
+ best way to run commands on found files is -exec switch.
+ You can point to the file with '{}' or {} and finish your command with \;.
+ remove all empty files in this directory and its subdirectories
+> find . -empty -exec rm '{}' \;
+rename all htm files to html
+> find . -name "*.htm" -exec mv '{}' '{}l' \;
+
+gzip & gunzip
+gzip preserves time
+gzip creates the new compressed file with the same name but with .gz ending
+gzip removes the original files after creating the compressed file (you can keep the input file with -k switch)
+
+another compressing tool. Works just like the famous gzip but with a different compression algorithm
+bzip2 & bunzip2
+xz & unxz
+
+Archiving with tar & cpio
+-cf myarchive.tar	create file named myarchive.tar
+-xf myarchive.tar	extract a file named myarchive.tar
+-z	compress the archive with gzip after creating it
+-b	compress the archive with bzip2 after creating it
+-v	verbose! print a lot of data about what is happening
+-r	append new files to the currently available archive
+
+$ ls | cpio -o > allfilesls.cpio
+3090354 blocks
+find . -name "*" | cpio -o > myarchivefind.cpio
+
+
+
+
+
+
+

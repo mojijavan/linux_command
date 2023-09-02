@@ -1,0 +1,2 @@
+search and find user word without letter sensetive in openvasmd help
+openvasmd --help | grep -i user

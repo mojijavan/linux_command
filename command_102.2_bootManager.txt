@@ -1,0 +1,76 @@
+Most systems use BIOS or UEFI
+
+in BIOS > first firmware called POST > load MBR and doing some work > load main bootloader(Lilo or Grub)
+> Grub doing its work and load init > init(systemd sysV) load anything needed 
+
+in UEFI > hardware follow UEFI Stages > after load final stages > load partition with FAT32 contains PE File
+
+GRUB
+It's a menu-based system where you can choose which Kernel or chainloader to boot.
+It is also possible to edit the menus on the fly or give direct commands from a command line.
+
+Grub main configuration
+> /boot/grub
+> /boot/grub>menu.list
+> /boot/grub/grub.conf
+
+After creating the configuration, you need to install the grub on a disk MBR.
+> grub-install /dev/fd0
+> grub-install '(fd0)'
+
+menuentry	Defines a new menuentry
+set root	Defines the root where /boot located
+linux, linux16	Defines the location of the Linux kernel on BIOS systems
+linuxefi	Defines the Linux kernel on UEFI systems
+initrd	Defines the initramfs image for BIOS systems
+initrdefi	Defines the initramfs image for UEFI systems
+
+Grub2
+> /boot/grub2/
+> /etc/default>grub #Grub2 Some Config
+> /boot/efi/EFI/distro-name/
+> /boot/efi/EFI/fedora/
+grub.cfg
+
+Grub2 Commands
+The installation is done with 
+> grub-install /dev/sda
+after changing the config files, you need to issue 
+grub2-mkconfig or grub-mkconfig.
+> grub2-mkconfig > /boot/grub2/grub.cfg
+> grub2-mkconfig -o /boot/grub2/grub.cfg
+
+Interacting with GRUB2
+If you press c on the grub menu, you will go into the GRUB Command Line or GRUB shell.
+ There you can type commands like root and kernel and initrd and boot the system with boot 
+or press the Esc key to return back to the menu.
+
+change linux kernel in grub
+change initrd in grub
+after change grub fie in
+> vim /etc/default/grub
+#GRUB_TIMEOUT_STYLE=HIDDEN
+GRUB_TIMEOUT=5
+> grub-mkconfig > /boot/grub/grub.cfg
+> reboot
+perss c
+grub > ls (hd0,gpt3)/boot/
+grub > linux (hd0,gpt3)/boot/vmlinuz ro root=/dev/sda1
+grub > initrd (hd0,gpt3)/boot/initrdimg
+
+
+
+
+These are some of the other options you may use in grub config:
+
+Option	Description
+console=	Set the console
+debug	Start in debug mode
+init=	Run an specific program instead of the default init
+initrd=	Use this initrd
+ro	Mount the root filesystem read only
+rw	Mount the root filesystem for read and write
+root=	Use this as the root filesystem
+selinux	Disable selinux on boot
+single,S,1,Single	Boot in single user mode for troubleshooting (SysV)
+systemd.unit=	Boot in this systemd target

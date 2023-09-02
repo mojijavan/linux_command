@@ -1,0 +1,87 @@
+The Boot Process
+1-Motherboard Firmware does a PowerOnSelfTest
+2-Motherboard loads the bootloader
+3-Bootloader loads the Linux Kernel-based on its configs/commands
+4-The Kernel loads and prepares the system (root filesystem) and runs the initialization program
+5-Init program start the service, other programs, ... (web server, graphical interface, networking, etc.)
+
+check using a UEFI system or not
+> /sys/firmware/efi
+
+unix bootloaders are Lilo and GRUB
+
+kernel needs some initial info to start; Things like drivers are necessary to work with the hardware. 
+Those are stored in initrd or initramfs alongside the kernel and used during the boot.
+
+dmesg command will show the full data from kernel ring buffer up to now.
+cat /var/log/dmesg
+
+check Kernel logs
+journalctl -k 
+boot logs 
+
+
+journalctl -b
+kernel to see all previous logs too
+journalctl -u
+
+In addition to these, most systems keep the boot logs in a text-like file too. Under Debian-based systems, it's called /var/log/boot and for RedHat-based systems, it's /var/log/boot.log.
+
+init
+Kernel finished its initialization > time to start other programs > Kernel runs the Initialization Daemon process > and it takes care of starting other daemons, services, subsystems and programs.
+Using the init system one can say "I need service A and then service B. Then I need C and D and E but do not start D unless the A and B are running". 
+The system admin can use the init system to stop and start the services later.
+
+There are different init systems:
+SysVinit
+systemd
+upstart
+
+The init process had the ID of 1 and you can find it by running the
+> /sbin/init
+> readlink -f /sbin/init
+> ps -p 1
+
+check the hierarchy of processes
+> pstree
+
+The systemd is made around units
+> systemctl list-units
+> systemctl list-units --type=target
+> systemctl get-default
+
+The units can be found in these places (sorted by priority):
+
+> /etc/systemd/system/
+> /run/systemd/system/
+> /usr/lib/systemd/system
+
+> systemctl list-unit-files
+> systemctl cat ntpd.service
+> systemctl cat graphical.target
+> systemctl stop sshd
+> systemctl start sshd
+> systemctl status sshd
+> systemctl is-active sshd
+> systemctl is-failed sshd
+> systemctl restart sshd
+> systemctl reload sshd > re-reads the configuration of the service configs
+> systemctl daemon-reload sshd > re-reads the configuration of the systemd configs of this service
+> systemctl enable sshd
+> systemctl disable sshd
+
+> journalctl > show all journal
+> journalctl --no-pager > do not use less
+> journalctl -n 10 > only 10 lines
+> journalctl -S -1d > last 1 day
+> journalctl -xe > last few logs
+> journalctl -u ntp > only ntp unit
+> journalctl _PID=1234
+
+SysV
+> /etc/init.d
+
+/etc/init.d/ntpd status
+/etc/init.d/ntpd stop
+/etc/init.d/ntpd start
+/etc/init.d/ntpd restart

@@ -1,0 +1,60 @@
+Static Linking is when you add this library to your executable program
+Dynamic Linking is when you just say in your program "We need this and that library to run this program"
+
+Libraries related to system utilities are installed in
+> /lib
+> /lib64
+libraries installed by other software will be located at 
+> /usr/lib
+> /usr/lib64
+
+The ldd command helps you find:
+If a program is dynamically or statically linked
+What libraries a program needs
+> ldd /sbin/ldconfig
+> ldd /bin/ls
+
+Symbolic links for libraries. use for link to updated library dynamically
+> locate libudev.so.1
+> ls -la /lib/i386-linux-gnu/libudev.so.1
+
+Dynamic library configs and cache
+> cat /etc/ld.so.conf
+> ls /etc/ld.so.conf.d/
+> ldconfig -p | head
+
+Where OS finds dynamic libraries
+LD_LIBRARY_PATH environment variable
+Programs PATH
+/etc/ld.so.conf (Which might load more files from /etc/ld.so.conf.d/ in its beginning or its end)
+/lib/, /lib64/, /usr/lib/, /usr/lib64/
+
+Loading dynamically
+In the last part of this section, 
+let's see how we can manually tell Linux to run a program using its dynamic linker. 
+> locate ld-linux
+> /usr/lib64/ld-linux-x86-64.so.2 /usr/bin/ls
+> readelf -Wl /usr/bin/ls
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

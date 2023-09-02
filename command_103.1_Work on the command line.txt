@@ -1,0 +1,46 @@
+You can check where your general sh command links to via
+> echo $SHELL
+
+Will show you your current directory:
+> pwd -a
+
+execute last command
+>!!
+
+show enviroment variable
+> env
+> set
+
+command details- example Vi
+> which Vi
+> whereis Vi
+> whatis Vi
+
+highlighting ls type and path(command type : internal , external , alias(shortcut))
+>type ls
+
+bash Enviroment variable, The prompt play with it
+> PS1
+
+> History
+execute 30th command in history
+> !30
+
+Set $HISTSIZE=0 for no saving command
+
+Will show you your current directory:
+> pwd
+
+Gives you data about the system. Common switches are:
+> uname
+
+If you want new programs starting from this shell to have access to the variable you defined, you have to set them with export or export them later.
+> export myVariable
+
+internal bash command path
+echo $PATH
+
+Command history
+> history
+If you want to clear your history, issue 
+HISTSIZE=0

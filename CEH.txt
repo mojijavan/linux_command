@@ -1,0 +1,23 @@
+type of hacks : black box , white box , grey box
+Hack value : asset value
+vulerabiblity = weakness 
+Exploit : use vulnerability for attack
+Payload : Data and Traffic that sending to victim for attack
+zeroday : security problem that not patched
+pivoting : daisy chaining - hierarchical access
+Doxing-PPI : Release information about a target or person
+Bot : A robot that works for us
+type of attack : access and get data - change data - disturb
+FUS : functionality - Security - usability
+CIA : Availibility - Integrety - Confidentiality
+Non Repudiation : if anybody change data we can tracing
+
+Attack vectors : 
+1- APT : Advanced persistend Threat - profesional attack with high cycle time
+2- Botnet
+3- Cloud Computing
+4- Insider attack
+5- mobile attacks
+6 viruses : A program that needs a host to survive
+7- Worms : Itself is a program
+8- malware

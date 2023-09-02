@@ -1,0 +1,90 @@
+run xeyes in forground
+> xeyes
+
+run xeyes in background
+> xeyes &
+
+break it using Ctrl+c - suspend or pause it using Ctrl+z for foreground programs
+
+A stopped job can be brought to the foreground using fg command (or the background using bg). You can also list all the jobs by the jobs command.
+
+
+
+kill all process with name contains eyes
+pgrep eyes | xargs kill
+
+The nohup command lets you run your commands even after you close the terminal or logout
+By default it writes its output to nohup.out
+> nohub ping 4.2.2.4
+run script in background in redirect result to mynohup and the end redirect errors to mynohup
+>nohup script.sh > mynohup.out 2>&1 &
+
+view process run in background
+> jobs
+
+kill process with processId
+kill -SIGNAL_ID_OR_NAME process_id
+> kill %4
+
+killall process with send name
+> killall sleep
+
+pkill kill process with my pattern
+> pkill sle
+ps -ef | grep sleep
+pkill sle
+
+The ps command shows running processes
+> ps
+
+the following two commands are equals
+> ps -ef | grep gedit
+> pgrep gedit
+
+monitoring system command
+> top
+> free
+> uptime
+
+run and check output intervally
+> watch free -h
+
+monitor log file entries as they are being written
+Monitoring the Apache log file using tail command.
+ >sudo tail -f /var/log/apache2/access.log
+ 
+ Downloading a file through wget
+ >wget -O report_wget.pdf https://www.offensive-security.com/reports/penetration-testing-sample-report-2013.pdf
+
+curl78 is a tool to transfer data to or from a server using a host of protocols including IMAP/S,
+POP3/S, SCP, SFTP, SMB/S, SMTP/S, TELNET, TFTP, and others.
+
+terminal multiplexers
+> screen
+> tmux
+
+screen
+> screen
+
+detach from screen
+> ctrl+a+d
+
+screen list
+> screen -ls
+
+retach screen- go to another screen
+> screen -r screenNumber
+
+devide screen
+> ctrl+a+|
+
+change default scrren
+> ctrl+a+Tab
+
+create new shell in new screen
+> ctrl+a+c
+
+next window
+> ctrl+a+n
+
+

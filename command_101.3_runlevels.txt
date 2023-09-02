@@ -1,0 +1,60 @@
+Candidates should be able to manage the SysVinit runlevel or systemd boot target of the system.
+
+Systemd
+
+different target
+> systemctl list-units --type=target
+
+check the default
+> systemctl get-default
+set default target
+> systemctl set-default graphical.target
+
+status 
+> systemctl status multi-user.target
+
+> systemctl isolate emergency
+> systemctl is-system-running
+
+SysV runlevels
+
+Red Hat-based system we usually had 7:
+0- Shutdown
+1- Single-user mode (recovery); Also called S or s
+2- Multi-user without networking
+3- Multi-user with networking
+4- to be customized by the admin
+5- Multi-user with networking and graphics
+6- Reboot
+
+And in Debian based system we had:
+0- Shutdown
+1- Single-user mode
+2- Multi-user mode with graphics
+6- Reboot
+
+check your current runlevel 
+> runlevel
+
+call init 5
+> telinit 5
+
+shutdown the system
+> init 0 
+
+shutdown -r 60 Reloading updated kernel
+
+Sending wall messages to logged-in users
+> wall
+
+Text to be displayed on the tty terminal logins (before login)
+>/etc/issue 
+
+Text to be displayed on the remote terminal logins (before login)
+/etc/issue.net
+
+Message of the day (after login). Some companies add "Do not enter if you are not allowed" texts here for legal reasons.
+/etc/motd
+
+Command controls if you want to get wall messages on not. You can do mesg n and who -T will show mesg status. Note that shutdown wall messages do not respect the mesg status
+mesg

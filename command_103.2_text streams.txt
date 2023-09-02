@@ -1,0 +1,103 @@
+Modern programming environments and shells (including bash) use three standard I/O streams:
+
+stdin is the standard input stream, which provides input to commands.
+stdout is the standard output stream, which displays output from commands.
+stderr is the standard error stream, which displays error output from commands
+
+
+
+copy typed text to file
+> cat > my data
+moji,10
+satar,20
+bagher,40
+#end file with ctrl+d
+
+view 2 file Content after him
+> cat mydata youdata
+Some common cat switches are 
+-n to show line numbers
+-s to squeeze blanks
+-T to show tabs
+-v to show non-printing characters.
+
+see the contents of compressed files without uncompressing them first
+bzcat, xzcat, zcat, gzcat
+
+show format other than text - like octalDump
+> od mydata
+
+Will split the files.
+> split -n 5 mydata output
+Need to join these files? cat them with 
+> cat output* > mydata.
+
+Will show the beginning (head) or end (tail) of text files. 
+tail -f follows the new lines which are being written at the end of the file. Very useful.
+
+The cut command will cut one or more columns from a file. Good for separating fields
+
+sort & uniq
+If you want a reverse sort, use the -r switch.
+If you want to sort NUMERICALLY (so 9 is lower than 19), use -n.
+> sort howcool.txt uses.txt
+
+uniq removes duplicate entries from its input
+> uniq what_i_have.txt
+> sort what_i_have.txt | uniq
+> sort what_i_have.txt  | uniq -c  #show count of each item
+> sort what_i_have.txt  | uniq -u #show only non-repeated items
+> sort what_i_have.txt  | uniq -d #show only repeated items
+
+The paste command pastes lines from two or more files side-by-side!
+> paste howcool uses
+
+The tr command translates characters in the stream
+> cat mydata | tr 'and' 'AND'
+
+sed is stream editor.
+> sed 's/ubuntu/debian/' uses #change first item in line
+> sed 's/A/B/g' #change all item in line
+
+The wc is word count
+It is very common to count the line numbers with -l switch.
+> wc -l mydata
+
+for replace use > charector
+>echo "hi ali" > text.txt
+for append to end of file use >> charector
+
+redirecting STDERROR
+show ls root and error for /ggg
+ls / /ggg
+no showing error. send error to /dev/null
+ls / /ggg 2>/dev/null
+show error in bash
+ls / /ggg 1>/dev/null
+
+The comm command66 compares two text files, displaying the lines that are unique to each one
+>comm scan-a.txt scan-b.txt
+
+The diff command67 is used to detect differences between files, similar to the comm command.
+However, diff is much more complex and supports many output formats
+context format (-c) and the unified format (-u).
+> diff -c scan-a.txt scan-b.txt
+
+vimdiff opens vim68 with multiple files, one in each window. The differences between files are
+highlighted, which makes it easier to visually inspect them.
+>vimdiff scan-a.txt scan-b.txt
+
+Hashing
+md5sum
+sha256sum
+sha512sum
+> md5sum /tmp/myfile.txt
+
+
+
+
+
+
+
+
+

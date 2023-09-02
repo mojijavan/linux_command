@@ -1,0 +1,145 @@
+The simplest TCP port scanning technique, usually called CONNECT scanning, relies on the threeway
+TCP handshake mechanism
+Using nc to perform a TCP port scan
+>nc -nvv -w 1 -z 10.11.1.220 3388-3390
+Using Netcat to perform a UDP port scan
+>nc -nv -u -z -w 1 10.11.1.115 160-162
+
+Port Scanning with Nmap
+A default Nmap TCP scan will scan the 1000 most popular ports on a given machine
+monitoring the amount of traffic sent to the target host using iptables
+Configuring our iptables rules for the scan
+>sudo iptables -I INPUT 1 -s 10.11.1.220 -j ACCEPT
+>sudo iptables -I OUTPUT 1 -d 10.11.1.220 -j ACCEPT
+>sudo iptables -Z
+Scanning an IP for the 1000 most popular TCP ports
+>nmap 10.11.1.220
+Using iptables to monitor nmap traffic for a top 1000 port scan
+>sudo iptables -vn -L
+
+Using iptables to monitor nmap traffic for a port scan on ALL TCP ports
+>sudo iptables -Z
+>nmap -p 1-65535 10.11.1.220
+>sudo iptables -vn -L
+
+Stealth / SYN Scanning
+Using nmap to perform a SYN scan
+>sudo nmap -sS 10.11.1.220
+three-way handshake is never completed
+the information is not passed to the application layer
+and as a result, will not appear in any application logs.
+A SYN scan is also faster and more efficient because fewer packets
+are sent and received.
+
+Using nmap to perform a TCP connect scan
+it does not require elevated privileges
+
+Using nmap to perform a UDP scan
+>sudo nmap -sU 10.11.1.115
+Using nmap to perform a combined UDP and SYN scan
+>sudo nmap -sS -sU 10.11.1.115
+
+Network Sweeping
+Using nmap to perform a network sweep
+>nmap -sn 10.11.1.1-254
+
+Using nmap to perform a network sweep and then using grep to find live hosts
+>nmap -v -sn 10.11.1.1-254 -oG ping-sweep.txt
+>grep Up ping-sweep.txt | cut -d " " -f 2
+
+Using nmap to scan for web servers using port 80
+>nmap -p 80 10.11.1.1-254 -oG web-sweep.txt
+>grep open web-sweep.txt | cut -d" " -f2
+
+Using nmap to perform a top twenty port scan, saving the output in greppable format
+>nmap -sT -A --top-ports=20 10.11.1.1-254 -oG top-port-sweep.txt
+
+The nmap-services file showing the open frequency of TCP port 80
+>cat /usr/share/nmap/nmap-services
+
+Using nmap for OS fingerprinting
+>sudo nmap -O 10.11.1.220
+
+Banner Grabbing/Service Enumeration
+Using nmap for banner grabbing and/or service enumeration
+>nmap -sV -sT -A 10.11.1.220
+
+Nmap Scripting Engine (NSE)
+NSE scripts are located in the /usr/share/nmap/scripts directory
+Using nmap’s scripting engine (NSE) for OS fingerprinting
+>nmap 10.11.1.220 --script=smb-os-discovery
+Using nmap to perform a DNS zone transfer
+>nmap --script=dns-zone-transfer -p 53 ns2.megacorpone.com
+page 193
+
+Masscan is fastest port scanner
+it can scan the entire Internet in about 6 minutes
+Using masscan to look for all web servers within a class A subnet 
+>masscan -p80 10.0.0.0/8
+Using masscan with more advanced options
+>masscan -p80 10.11.1.0/24 --rate=1000 -e tap0 --router-ip 10.11.0.1
+
+SMB Enumeration - Server Message Block
+NetBIOS is an independent session layer protocol and service 
+that allows computers on a local network to communicate with each other.
+Using nmap to scan for the NetBIOS service
+>nmap -v -p 139,445 -oG smb.txt 10.11.1.1-254
+Using nbtscan to collect additional NetBIOS information
+>nbtscan -r 10.11.1.0/24
+Using the nmap scripting engine to perform OS discovery
+>nmap -v -p 139, 445 --script=smb-os-discovery 10.11.1.227
+Determining whether a host is vulnerable to the MS08_067 vulnerability
+>nmap -v -p 139,445 --script=smb-vuln-ms08-067 --script-args=unsafe=1 10.11.1.5
+
+NFS Enumeration - Network File System
+protocol for sharing data like data place on local pc
+Scanning for NFS Shares
+Using nmap to identify hosts that have portmapper/rpcbind running
+>nmap -v -p 111 10.11.1.1-254
+Querying rpcbind in order to get registered services
+>nmap -sV -p 111 --script=rpcinfo 10.11.1.1-254
+Running all NSE scripts for NFS
+>nmap -p 111 --script nfs* 10.11.1.72
+Learn directory sharing book pwkv2 page 199
+
+SMTP Enumeration
+gather information about a host or network from vulnerable mail servers
+Using nc to validate SMTP users
+>nc -nv 10.11.1.217 25
+Using Python to script the SMTP user enumeration page 201
+
+SNMP Enumeration
+SNMP is based on UDP, a simple, stateless protocol, and is therefore susceptible to IP spoofing and replay attacks
+SNMP protocols 1, 2, and 2c offer no traffic encryption
+SNMP is another one of our favorite enumeration protocols
+SNMP Management Information Base (MIB) is a database containing information usually related to network management
+Using nmap to perform a SNMP scan
+>sudo nmap -sU --open -p 161 10.11.1.1-254 -oG open-snmp.txt
+Using onesixtyone to brute force community strings
+>echo public > community
+>echo private >> community
+>echo manager >> community
+>for ip in $(seq 1 254); do echo 10.11.1.$ip; done > ips
+>onesixtyone -c community -i ips
+Using snmpwalk to enumerate the entire MIB tree
+>snmpwalk -c public -v1 -t 10 10.11.1.14
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
