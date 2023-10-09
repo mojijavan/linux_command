@@ -60,6 +60,8 @@ change back to last commit file
 >git checkout fixpages
 after chnage and commit we can go to master and accept or reject changes
 
+merge fixpages branch changed to master
+>git merge fixpages
 
 
 
@@ -70,6 +72,8 @@ after chnage and commit we can go to master and accept or reject changes
 
 
 
+
+ 
 
 
 
