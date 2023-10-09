@@ -1,0 +1,108 @@
+Git is a Version System Control
+
+#create in path .git in a local system
+>git init 
+
+#add files to stage area
+>git add .
+>git add *.html
+
+#show git tree current status
+>git status
+
+#action for add files to repository
+>git commit
+>git commit -m 'text comment'
+
+#Set your username:
+>git config --global user.name "FIRST_NAME LAST_NAME"
+
+#Set your email address:
+>git config --global user.email "MY_NAME@example.com"
+
+#uplod project to server
+>git push
+
+#uplod last changes and update project
+>git pull
+
+#create backup from all files in git folders
+>git clone
+
+Steps
+git init 
+git add .
+>git config --global user.name "FIRST_NAME LAST_NAME"
+>git config --global user.email "MY_NAME@example.com"
+git remote add origin repository_URL
+git push origin master
+
+History off Commit
+>git log
+
+Check Different with last Commit
+>git diff HEAD
+
+Satge All Files
+>git add -A
+
+Check Different with Staged Files
+>git diff --staged
+
+delete file from staged step
+>git reset file.htlm
+
+change back to last commit file
+>git checkout -- file.html
+
+>git branch
+>git branch fixpages
+>git checkout fixpages
+after chnage and commit we can go to master and accept or reject changes
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
