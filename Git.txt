@@ -63,6 +63,18 @@ after chnage and commit we can go to master and accept or reject changes
 merge fixpages branch changed to master
 >git merge fixpages
 
+delete branch
+>git branch -d fixpages
+
+copy project from git to system(origin to master)
+>git clone repository-Address
+
+copy local git to origin
+>git push origin master
+
+add changes to local
+>git pull origin master
+
 
 
 
