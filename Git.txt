@@ -75,6 +75,20 @@ copy local git to origin
 add changes to local
 >git pull origin master
 
+>git remote add origin gitAddress
+
+if two master work on files and want commit perhaps conflict doing
+for resolve before push first pull from origin and check conflict
+then we can edit and push again
+
+>git tag -a v2.0.1 'description for software version'
+>git tag -a v2.2.2 aabb25tre...(commit Code)
+
+git push not pushing tags.for push tag to origin we have use below command
+>git push origin v1.8
+>gitpush origin --tags
+
+>git checkout v1.8
 
 
 
