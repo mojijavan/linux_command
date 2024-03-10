@@ -14,6 +14,14 @@ fclose($g);
 echo "salam user"
 ?>
 
+chmod learning
+first charector show file type - example directory or file or device or network device
+another charector shows read write execute for user access-group access-another access
+drwxrwxrwx 
+
+>chmod 777 works.txt equals -wrxwrxwrx
+>chmod 624 works.txt equuals -wr--r-wr-
+
 access for write to directory from web
 >chmod 777 html/
 or
