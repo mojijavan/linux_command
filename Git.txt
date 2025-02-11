@@ -1,5 +1,15 @@
 Git is a Version System Control
 
+#simple git manage files
+#connect to repo in github
+>git clone repo_url
+#getch files from remote
+>git pull
+#add local changes and commit
+>git add .
+>git commit -m 'description'
+>git push
+
 #create in path .git in a local system
 >git init 
 
