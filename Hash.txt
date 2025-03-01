@@ -1,0 +1,3 @@
+Check File Hash 
+>sha256sum filename
+>md5sum filename
