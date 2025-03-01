@@ -1,0 +1,29 @@
+nmap popular,versatile,and robust port scanners
+default Nmap TCP scan will scan the 1000 most popular ports
+
+We’ll scan and monitoring the amount of traffic sent to the target host using iptables command
+Configuring our iptables rules for the scan
+>sudo iptables -I INPUT 1 -s 10.11.1.220 -j ACCEPT
+>sudo iptables -I OUTPUT 1 -d 10.11.1.220 -j ACCEPT
+>sudo iptables -Z
+-I option to insert a new rule
+-s to specify a source IP address
+-d to specify a destination IP address,
+-j to ACCEPT the traffic
+-Z option to zero the packet and byte counters in all chains.
+
+Scanning an IP for the 1000 most popular TCP ports
+>nmap ip
+
+Using iptables to monitor nmap traffic for a top 1000 port scan
+>sudo iptables -vn -L
+-v option to add some verbosity to our output
+-n to enable numeric output
+-L to list the rules present in all chains
+
+Using iptables to monitor nmap traffic for a port scan on ALL TCP ports
+#zero the packet and byte counters in all chains again
+>sudo iptables -Z
+#nmap scan using -p to specify ALL TCP ports
+>nmap -p 1-65535 10.11.1.220
+>sudo iptables -vn -L
