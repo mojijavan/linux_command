@@ -27,3 +27,63 @@ Using iptables to monitor nmap traffic for a port scan on ALL TCP ports
 #nmap scan using -p to specify ALL TCP ports
 >nmap -p 1-65535 10.11.1.220
 >sudo iptables -vn -L
+
+Stealth / SYN Scanning
+send syn request and if port is open syn-ack Come back and ack not sending and handshaking not completed
+because three handshake not completed data not see in application layer and logs
+>sudo nmap -sS ip
+term “stealth” , in the past, primitive firewalls would fail to log incomplete TCP connections. but modern firewalls is detect this scans
+
+TCP Connect Scanning
+does not require elevated privileges
+connect scan takes much longer to complete than a SYN scan
+> nmap -sT ip
+
+UDP Scanning
+nmap use prodtocols like icmp or snmp for check port status
+> sudo nmap -sU ip
+
+Using nmap to perform a combined UDP and SYN scan
+> sudo nmap -sS -sU ip
+
+Network Sweeping
+for scan large volumes of hosts begin with broad scans, and use more specific scans against hosts of interest
+> nmap -sn 10.11.1.1-254
+
+we can use Nmap’s “greppable” output parameter, -oG, to save these results into a format that is easier to manage:
+Using nmap to perform a network sweep and then using grep to find live hosts
+> nmap -v -sn 10.11.1.1-254 -oG ping-sweep.txt
+> grep Up ping-sweep.txt | cut -d " " -f 2
+
+Using nmap to scan for web servers using port 80
+> nmap -p 80 10.11.1.1-254 -oG web-sweep.txt
+> grep open web-sweep.txt | cut -d" " -f2
+
+Using nmap to perform a top twenty port scan, saving the output in greppable format
+> nmap -sT -A --top-ports=20 10.11.1.1-254 -oG top-port-sweep.txt
+-A enable os detection 
+
+OS Fingerprinting
+simple nmap OS fingerprint scan
+sudo nmap -O 10.11.1.220
+
+Banner Grabbing/Service Enumeration
+identify services running on specific ports by inspecting service banners (-sV)
+> nmap -sV -sT -A 10.11.1.220
+
+Nmap Scripting Engine (NSE)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

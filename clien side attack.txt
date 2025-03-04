@@ -26,3 +26,9 @@ access for write to directory from web
 >chmod 777 html/
 or
 >chmode o+w html/
+
+change file owner users and file owner groups
+>chown root:root works.txt
+
+change file groups
+>chgrp moji works.txt

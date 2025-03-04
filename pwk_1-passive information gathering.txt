@@ -1,0 +1,53 @@
+
+Passive Information Gathering(also known as Open-source Intelligence or OSINT)
+In the strictest interpretation, we never communicate with the target directly.
+DNS
+>whois bndweb.ir
+
+google hacking
+Using Google to Find Directory Listings
+intitle:“index of” “parent directory” filetype:asdf site:asdf
+*we can use The Google Hacking Database (GHDB) for gathering information
+*we can use netcraft for datagathering from website
+
+>nslookup bndweb.ir
+
+recon-ng is a module-based framework for web-based information gathering
+>recon-ng
+Searching module index for 'github'
+Searching the Marketplace for GitHub modules
+>marketplace search github
+Getting information on a module
+>marketplace info recon/domains-hosts/google_site_web
+Installing a module
+>marketplace install recon/domains-hosts/google_site_web
+Using recon/domains-hosts/google_site_web
+>modules load recon/domains-hosts/google_site_web
+Setting a source
+>options set SOURCE megacorpone.com
+>run
+>back
+>show
+>show hosts
+Module information for recon/hosts-hosts/resolve
+>marketplace info recon/hosts-hosts/resolve
+>marketplace install recon/hosts-hosts/resolve
+Installing and viewing recon/hosts-hosts/resolve
+>modules load recon/hosts-hosts/resolve
+google captcha triggered . no bypass availible
+
+Shodan
+hostname:bndweb.ir port:"22"
+https://github.com/mr-exo/shodan-dorks
+
+
+
+use web data extractor in windows
+use httrack
+use metagofil for downlosd file from website with specific type
+>metagofil -d bndweb.ir -t pdf,doc -l 200 -n 3 -o myfiles -f results.html
+social enginering
+eavesdroppingb - listening
+pishing
+sholder surfing - sneak peak
+dumpster - trash - garbage checking
