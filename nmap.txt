@@ -57,7 +57,7 @@ Using nmap to perform a network sweep and then using grep to find live hosts
 
 Using nmap to scan for web servers using port 80
 > nmap -p 80 10.11.1.1-254 -oG web-sweep.txt
-> grep open web-sweep.txt | cut -d" " -f2
+> grep open web-sweep.txt | cut -d " " -f 2
 
 Using nmap to perform a top twenty port scan, saving the output in greppable format
 > nmap -sT -A --top-ports=20 10.11.1.1-254 -oG top-port-sweep.txt
@@ -72,11 +72,59 @@ identify services running on specific ports by inspecting service banners (-sV)
 > nmap -sV -sT -A 10.11.1.220
 
 Nmap Scripting Engine (NSE)
+launch user-created scripts in order to automate
+various scanning tasks. These scripts perform a broad range of functions including DNS
+enumeration, brute force attacks, and even vulnerability identification. NSE scripts are located in
+the /usr/share/nmap/scripts directory
 
+Using nmap’s scripting engine (NSE) for OS fingerprinting
+> nmap 10.11.1.220 --script=smb-os-discovery
 
+Using nmap to perform a DNS zone transfer
+> nmap --script=dns-zone-transfer -p 53 ns2.megacorpone.com
 
+Using the --script-help option to view more information about a script
+> nmap --script-help dns-zone-transfer
 
+Finding various nmap SMB NSE scripts
+> ls -1 /usr/share/nmap/scripts/smb*
 
+Using the nmap scripting engine to perform OS discovery
+> nmap -v -p 139, 445 --script=smb-os-discovery 10.11.1.227
+
+Determining whether a host is vulnerable to the MS08_067 vulnerability
+> nmap -v -p 139,445 --script=smb-vuln-ms08-067 --script-args=unsafe=1 10.11.1.5
+
+NFS Enumeration
+Both Portmapper214 and RPCbind215 run on TCP port 111. RPCbind maps RPC services to the ports
+on which they listen. RPC processes notify rpcbind when they start, registering the ports they are
+listening on and the RPC program numbers they expect to serve.
+
+Using nmap to identify hosts that have portmapper/rpcbind running
+> nmap -v -p 111 10.11.1.1-254
+
+Querying rpcbind in order to get registered services
+> nmap -sV -p 111 --script=rpcinfo 10.11.1.1-254
+
+Locating various NSE scripts for NFS
+> ls -1 /usr/share/nmap/scripts/nfs*
+
+Running all NSE scripts for NFS
+> nmap -p 111 --script nfs* 10.11.1.72
+
+NFS attack example
+pwkv2 book page 199
+
+pwkv2 page 200
+run all three of nfs scripts on single host
+> nmap -p 111 --script nfs* 10.11.1.72
+
+replace the UUID in the /etc/passwd
+> sudo sed -i -e 's/1001/1014/g' /etc/passwd
+
+Scanning for SNMP
+> sudo nmap -sU --open -p 161 10.11.1.1-254 -oG open-snmp.txt
+-open option is used to limit the output to only display open ports
 
 
 

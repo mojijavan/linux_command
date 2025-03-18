@@ -1,5 +1,25 @@
+for configuration network must change ./etc/network/interface file
+add command to interface file for static ip set
+
+
+in ubunto needs edit /etc/netplan/01-network-manager-all.yaml
+
+auto eth1
+iface eth1 inet static
+	address 192.168.10.10
+	netmask 255.255.255.0
+	gateway 192.168.1.1
+	dns-nameservers 8.8.8.8 8.8.4.4
+	#additional launch the firewall before  start interface
+	pre-up /usr/local/sbin/start-iptables.sh
+	#additional script to execute a backup after disabling the interfaces
+	post-up /usr/local/sbin/backup-log.sh
+
+
+
 #show interface data
-> ip address show
+>ip address show
+>ip a
 #set ip address for interface
 >sudo ipconfig eth0:0 10.1.0.15 netmask 255.255.255.0
 #show interfaces data
@@ -9,10 +29,3 @@ sudo ifconfig
 
 network file location
 /etc/sysconfig/network 
-n
-
-
-
-
-
-#description for div
