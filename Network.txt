@@ -3,17 +3,25 @@ add command to interface file for static ip set
 
 
 in ubunto needs edit /etc/netplan/01-network-manager-all.yaml
-
-auto eth1
-iface eth1 inet static
-	address 192.168.10.10
-	netmask 255.255.255.0
-	gateway 192.168.1.1
-	dns-nameservers 8.8.8.8 8.8.4.4
-	#additional launch the firewall before  start interface
-	pre-up /usr/local/sbin/start-iptables.sh
-	#additional script to execute a backup after disabling the interfaces
-	post-up /usr/local/sbin/backup-log.sh
+>sudo vim /etc/netplan/01-network-manager-all.yaml
+	network:
+	ethernets:
+		enp1s0:
+			addresses: [192.168.1.100/24]
+			routes:
+				- to: default
+				via: 192.168.1.100
+				on-link: True
+			nameservers:
+				addresses: [8.8.8.8, 1.1.1.1]
+				dhcp4: false
+				optional: true
+	version: 2
+	>sudo netplan apply
+	
+	#How to restart the networking service?
+	>sudo service network-manager restart
+	>sudo systemctl restart systemd-networkd
 
 
 

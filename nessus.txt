@@ -1,0 +1,9 @@
+hellodigi version
+user:hellodigi
+pass:admin
+
+sudo vim /etc/netplan/00-installer-config.yaml
+
+https://ip:8834/
+user:admin
+pass:admin

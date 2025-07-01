@@ -1,0 +1,24 @@
+view date
+>timedatectl
+
+see timezone list
+>timedatectl list-timezones
+
+set timezone
+>sudo timedatectl set-timezone Asia/Tehran
+
+set time
+>sudo timedatectl set-time '2025-07-01 14:30:00'
+
+sudo timedatectl set-ntp true
+
+sudo timedatectl set-ntp false
+
+show hardware time
+>sudo hwclock --show
+
+syncrinize hardware with system time
+>sudo hwclock --systohc
+
+set time with date command. time preffered
+sudo date --set="2025-07-01 14:30:00"
